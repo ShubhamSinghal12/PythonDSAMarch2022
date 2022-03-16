@@ -1,22 +1,25 @@
 n = 5
 
-nsp = 0
-nst = n
+nsp = n-1
+nst = 1
 row = 1
+val = 1
 
 while row <= n:
 
     csp = 1
     while csp <= nsp:
-        print(" ",end = " ")
+        print(" ",end = "\t")
         csp += 1
     
     cst = 1
     while cst <= nst:
-        print("*",end = " ")
+        print(val,end = "\t")
+        val += 1
         cst += 1
     
-    row += 1
-    nsp += 1
-    nst -= 1
     print()
+    # val += 1
+    row += 1
+    nsp -= 1
+    nst += 2
