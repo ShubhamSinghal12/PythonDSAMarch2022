@@ -4,7 +4,7 @@ nsp = n-1
 nst = 1
 row = 1
 val = 1
-
+# cval = val
 while row <= n:
 
     # val = 1
@@ -15,7 +15,9 @@ while row <= n:
         csp += 1
     
     cst = 1
+
     cval = val
+    
     while cst <= nst:
         print(cval,end = " ")
         

@@ -15,6 +15,7 @@ while row <= n:
         csp += 1
     
     cst = 1
+    
     while cst <= nst:
         print(val,end = " ")
         val += 1
