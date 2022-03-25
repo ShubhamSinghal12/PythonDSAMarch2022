@@ -1,5 +1,4 @@
 from sys import getsizeof
-from webbrowser import get
 
 a = 2**100
 print(type(a))
