@@ -21,7 +21,6 @@ def rotate(n,k):
 
     r = n%(10**k)
     q = n//(10**k)
-
     n = r*(10**(nd-k))+q
 
     print(n)
