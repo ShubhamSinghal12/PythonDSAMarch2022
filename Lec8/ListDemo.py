@@ -60,20 +60,32 @@
 # arr = [int(input()) for i in range(n)]
 
 
-arr = [int(i) for i in input().split()]
+# arr = [int(i) for i in input().split()]
 
 
-def search(arr,ele):
+# def search(arr,ele):
     
-    for i in range(len(arr)):
-        if arr[i] == ele:
-            return i
+#     for i in range(len(arr)):
+#         if arr[i] == ele:
+#             return i
     
-    return -1
+#     return -1
 
-if search(arr,20) == -1:
-    print("Element is not there")
-else:
-    print("Element is there")
+# if search(arr,20) == -1:
+#     print("Element is not there")
+# else:
+#     print("Element is there")
+
+
+
+
+
+
+a = []
+b = []
+for i in range(100):
+    a.append(i)
+    b.append(i)
+
 
 

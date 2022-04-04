@@ -1,5 +1,7 @@
 
 def reverse(arr,si,ei):
+    if ei >= len(arr):
+        ei = len(arr)-1
 
     while si < ei:
         t = arr[si]
@@ -14,5 +16,4 @@ arr = [5,3,4,1,2]
 
 reverse(arr,1,4)
 print(arr)
-
 print(arr[6])
