@@ -39,7 +39,6 @@ def upperBound(a,ele):
     ans = -1
     while si <= ei:
         mid = (si+ei)//2
-
         if a[mid] == ele:
             ans = mid
             si = mid+1
