@@ -70,4 +70,3 @@ def reverseWord(st):
 
 reverseWord("The sky is Blue")
 
-print(reverseString?)
