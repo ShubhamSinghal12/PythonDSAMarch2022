@@ -10,6 +10,7 @@ def ss1(st):
         for i in rr:
             ans.append(ch+i)
             ans.append(i)
+            # ans.append(str(ord(ch))+i)
         
         return ans
 
