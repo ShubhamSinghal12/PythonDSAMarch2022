@@ -1,2 +1,15 @@
-a = [1,2,3,4]
-# print(a[::-2])
+def dec(fnc):
+    def newF():
+        print("In Deco")
+        fnc()
+        print("Out Deco")
+    
+    return newF
+
+
+@dec
+def hello():
+    print("Hello")
+
+
+hello()
