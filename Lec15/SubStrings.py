@@ -1,6 +1,3 @@
-from audioop import reverse
-
-
 st = "abcde"
 
 def subString(st):
@@ -69,4 +66,6 @@ def reverseWord(st):
     print(ans)
 
 reverseWord("The sky is Blue")
+
+
 

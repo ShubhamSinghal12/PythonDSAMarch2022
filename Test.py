@@ -1,15 +1,6 @@
-def dec(fnc):
-    def newF():
-        print("In Deco")
-        fnc()
-        print("Out Deco")
-    
-    return newF
+s = "123"
+s1 = "123"
+i = 123
+s2 = str(123)
 
-
-@dec
-def hello():
-    print("Hello")
-
-
-hello()
+print(id(s),id(s1),id(s2))
