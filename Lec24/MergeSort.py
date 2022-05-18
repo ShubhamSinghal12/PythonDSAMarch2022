@@ -1,6 +1,3 @@
-from turtle import right
-
-
 def merge(arr,brr):
     r = []
     i = 0
