@@ -11,6 +11,9 @@ class Person:
         self.name = name
         self.age = age
     
+    def __str__(self) -> str:
+        return self.name+" "+str(self.age)
+    
     # def __init__(self,p):
     #     self.name = p.name
     #     self.age = p.age 
@@ -19,7 +22,9 @@ class Person:
     def introduceYourself(self):
         print("Hi! My name is "+self.name)
 
+Person.country = "Netherlands"
 s1 = Person("Rahul",19)
+print(s1.country)
 s1.introduceYourself()
 s1.__class__.country = "USA"
 print(s1.country)
@@ -32,6 +37,7 @@ s2 = Person("Mohan",25)
 print(s2.country)
 
 s2.introduceYourself()
+print(s2)
 
 # print(s1.name+" "+s2.name)
 # def test(s1,s2):

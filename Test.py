@@ -1,6 +1,7 @@
-s = "123"
-s1 = "123"
-i = 123
-s2 = str(123)
+def pt(abc):
+    print(abc)
 
-print(id(s),id(s1),id(s2))
+
+pt(1)
+pt("ABC")
+print(3.5)
