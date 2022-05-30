@@ -1,7 +1,7 @@
-def pt(abc):
-    print(abc)
+def fn(a,b):
+    print(a+b)
 
+def fn():
+    print("Second")
 
-pt(1)
-pt("ABC")
-print(3.5)
+fn()
