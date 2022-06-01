@@ -16,6 +16,7 @@ class Child(Parent):
         # self.name = "M"
         # super().__init__(name,age)
         Parent.__init__(self,name,age)
+        print(super().x)
 
         # self.rollNo = 100
     def wave(self):
