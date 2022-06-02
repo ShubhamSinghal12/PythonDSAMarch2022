@@ -53,11 +53,11 @@ class DynamicQueue(MyQueue):
             self.front = 0
         super().enqueue(ele)
 
-ds = DynamicQueue(5)
-for i in range(11):
-    ds.enqueue(i)
+# ds = DynamicQueue(5)
+# for i in range(11):
+#     ds.enqueue(i)
 
-ds.display()
+# ds.display()
 
 
 
