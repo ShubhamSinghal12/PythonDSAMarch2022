@@ -266,23 +266,128 @@ class MyLinkedList:
                 j = j.next
         
         self.head = h.next
+    
+    def dummyListForIntersection(self):
 
+        n1 = self.Node(1)
+        n2 = self.Node(2)
+        n3 = self.Node(3)
+        n4 = self.Node(4)
+        n5 = self.Node(5)
+        n6 = self.Node(6)
+        n7 = self.Node(7)
+        n8 = self.Node(8)
+        n9 = self.Node(9)
+        n10 = self.Node(10)
+        n11 = self.Node(11)
+        n12 = self.Node(12)
+        n13 = self.Node(13)
+
+        n1.next = n2
+        n2.next = n3
+        n3.next = n4
+        n4.next = n5 
+        n5.next = n6 
+        n6.next = n7
+        n7.next = n8
+        n8.next = n9
+        n9.next = n10
+        n11.next = n12
+        n12.next = n13
+        n13.next = n7
+
+        self.IP(n1,n11)
+    
+    def IP(self,head1,head2):
+        s1 = head1
+        s2 = head2
+
+        while s1 != s2:
+            if s1 == None:
+                s1 = head2
+            if s2 == None:
+                s2 = head1
+            
+            s1 = s1.next
+            s2 = s2.next
+        
+        if s1 == None:
+            print(None)
+        else:    
+            print(s1.data)
+    
+    def dummyListForCycle(self):
+        n1 = self.Node(1)
+        n2 = self.Node(2)
+        n3 = self.Node(3)
+        n4 = self.Node(4)
+        n5 = self.Node(5)
+        n6 = self.Node(6)
+        n7 = self.Node(7)
+        n8 = self.Node(8)
+
+        n1.next = n2
+        n2.next = n3
+        n3.next = n4
+        n4.next = n5 
+        n5.next = n6 
+        n6.next = n7
+        n7.next = n8
+
+        n8.next = n3
+
+        self.head = n1
+
+        self.cycle()
+    
+    def cycle(self):
+        slow = self.head
+        fast = self.head
+        while fast != None and fast.next != None:
+            slow = slow.next
+            fast = fast.next.next
+            if slow == fast:
+                break
+        
+        if slow == fast:
+            # n = 1
+            # t = slow
+            # while t.next != slow:
+            #     n += 1
+            #     t = t.next
+            # print(n)
+            s2 = slow
+            # for i in range(n):
+            #     s2 = s2.next
+            
+            s1 = self.head
+            while s1.next != s2.next:
+                s1 = s1.next
+                s2 = s2.next
+            
+            s2.next = None
+
+        else:
+            print("There is No Cycle")
 
         
 
+l= MyLinkedList()
+l.dummyListForCycle()
+l.display()
 
-l1 = MyLinkedList()
-l2 = MyLinkedList()
-for i in range(0,9):
-    l1.addLast(i+1)
+# l1 = MyLinkedList()
+# l2 = MyLinkedList()
+# for i in range(0,9):
+#     l1.addLast(i+1)
     # l1.addFirst(2*i+2)
     # ll.display()
 
-l1.display()
+# l1.display()
 # print(l1.midData())
 # l1.mergerSort()
-l1.fold()
-l1.display()
+# l1.fold()
+# l1.display()
 # l2.display()
 # l = l1.merge(l2)
 # l.display()
