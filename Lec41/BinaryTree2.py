@@ -195,6 +195,40 @@ class BinaryTree:
             m = self.__lv(cur.right,lvl+1,m)
             
             return m
+    
+    def mirrorBinaryTree(self,rt):
+        if rt==None:
+            return
+        else:
+            self.mirrorBinaryTree(rt.left)
+            self.mirrorBinaryTree(rt.right)
+            rt.left,rt.right = rt.right,rt.left
+    
+    def isBST(self):
+        return self.__isBST(self.root,-10**8,10**8)
+    
+    def __isBST(self,cur,l,r):
+        if cur == None:
+            return True
+        else:
+            if l <= cur.data <= r:
+                return self.__isBST(cur.left,l,cur.data) and self.__isBST(cur.right,cur.data,r)
+            else:
+                return False
+    
+    def isBST2(self):
+        return self.__isBST2(self.root)[0]
+    # 0 --> isBSt , 1 --> min, 2 --> max 
+    def __isBST2(self,cur):
+        if cur == None:
+            return (True,10**8,-10**8)
+        else:
+            l = self.__isBST2(cur.left)
+            r = self.__isBST2(cur.right)
+
+            cibst = cur.data >= l[2] and cur.data <= r[1]
+
+            return (l[0] and cibst and r[0], min(l[1],r[1],cur.data), max(l[2],r[2],cur.data))
 
 
 mt = BinaryTree()
@@ -206,4 +240,9 @@ mt.createTree2()
 # mt.display()
 # print(mt.diameter())
 # mt.rightview()
-mt.lv()
+# mt.lv()
+# mt.display()
+# mt.mirrorBinaryTree(mt.root)
+# print("---------------------------------------")
+# mt.display()
+print(mt.isBST2())
