@@ -309,6 +309,55 @@ class BinaryTree:
             f = abs(lh-rh) <= 1
 
             return f and lisb and risb, max(lh,rh)+1
+    
+    def verticalOrder(self):
+        dt = {}
+        self.__vo(self.root,0,dt)
+        k = list(dt.keys())
+        k.sort()
+        for key in k:
+            print(key,":",dt[key])
+        print()
+    
+    def __vo(self,cur,lvl,dt:"dict"):
+        if cur == None:
+            return
+        else:
+
+            if lvl in dt:
+                dt.get(lvl).append(cur.data)
+            else:
+                dt[lvl] = [cur.data]
+
+            self.__vo(cur.left,lvl-1,dt)
+            self.__vo(cur.right,lvl+1,dt)
+    
+
+    def TopView(self):
+        dt = {}
+        self.__tpv(self.root,0,0,dt)
+        k = list(dt.keys())
+        k.sort()
+        for key in k:
+            print(key,":",dt[key][0])
+        print()
+    
+    def __tpv(self,cur,vlvl,hlvl,dt:"dict"):
+        if cur == None:
+            return
+        else:
+
+            if vlvl in dt:
+                t = dt.get(vlvl)
+                if t[1] > hlvl:
+                    dt[vlvl] = (cur.data,hlvl)
+            else:
+                dt[vlvl] = (cur.data,hlvl)
+
+            self.__tpv(cur.left,vlvl-1,hlvl+1,dt)
+            self.__tpv(cur.right,vlvl+1,hlvl+1,dt)
+
+
 
 
 
@@ -328,6 +377,7 @@ mt.createTree2()
 # qt.append(mt.Node(10))
 # qt.append(mt.Node(20))
 # print(qt)
-print(mt.isBal2())
+# print(mt.isBal2())
+mt.TopView()
 
 
