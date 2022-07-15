@@ -1,4 +1,7 @@
 from collections import deque
+from queue import PriorityQueue
+
+from pyrsistent import v
 
 
 class Graph:
@@ -10,7 +13,7 @@ class Graph:
     
     def addEdge(self,u,v,val=0):
         self.map[u][v] = val
-        self.map[v][u] = val
+        # self.map[v][u] = val
     
     def containsEdge(self,u,v):
         return v in self.map[u]
@@ -234,30 +237,152 @@ class Graph:
                 self.rank = 0
         
         def __init__(self):
-            pass
+            self.ds = {}
 
         def createSet(self,vtx):
-            pass
+            n = self.Node(vtx)
+            self.ds[vtx] = n
         
         def union(self,u,v):
-            pass
+            ru = self.__fd(self.ds[u])
+            rv = self.__fd(self.ds[v])
+            if ru != rv:
+                if ru.rank == rv.rank:
+                    ru.parent = rv
+                    rv.rank += 1
+                elif ru.rank > rv.rank:
+                    rv.parent = ru
+                else:
+                    ru.parent = rv
         
         def find(self,u):
-            pass
+            c = self.__fd(self.ds[u])
+            return c.data
+        
+        def __fd(self,cur):
+            while cur.parent != cur:
+                cur = cur.parent
+        
+            return cur
+        
+    # Prims  ---> u is nbrs, v is via, cost is wt
+    # Djakstra -> u in nbrs, v is path, cost is pathCost
+    class EdgePair:
+        def __init__(self,u,v,cost):
+            self.u = u
+            self.v = v
+            self.cost = cost
+        
+        def __lt__(self,oth):
+            return self.cost < oth.cost
+        
+        def __str__(self):
+            return str(self.u)+" -> "+str(self.v)+" @ "+str(self.cost)
+
+        
+    def __egp(self):
+        el = []
+        for u in self.map:
+            for v in self.map[u]:
+                el.append(self.EdgePair(u,v,self.map[u][v]))
+        
+        return el
+
+    def krushkal(self):
+        dsj = self.DisjointSets()
+        el = self.__egp()
+        el.sort()
+        for u in self.map:
+            dsj.createSet(u)
+
+        for e in el:
+            ru = dsj.find(e.u)
+            rv = dsj.find(e.v)
+            if ru != rv:
+                print(e)
+                dsj.union(ru,rv)
+    
+
+    def prims(self):
+        qt = PriorityQueue()
+        visited = set()
+
+        qt.put(self.EdgePair(1,0,0))
+        while not qt.empty():
+            edge = qt.get()
+            if edge.u in visited:
+                continue
+
+            visited.add(edge.u)
+            print(str(edge.u)+" via "+str(edge.v)+" @ "+str(edge.cost))
+                        
+            for nbrs in self.map[edge.u]:
+                if nbrs not in visited:
+                    qt.put(self.EdgePair(nbrs,edge.u,self.map[edge.u][nbrs]))
+    
+    def dijakstra(self):
+        qt = PriorityQueue()
+        visited = set()
+
+        qt.put(self.EdgePair(1,"",0))
+        while not qt.empty():
+            edge = qt.get()
+            if edge.u in visited:
+                continue
+
+            visited.add(edge.u)
+            print(str(edge.u)+" via "+edge.v+" @ "+str(edge.cost))
+                        
+            for nbrs in self.map[edge.u]:
+                if nbrs not in visited:
+                    qt.put(self.EdgePair(nbrs,edge.v+" "+str(edge.u),edge.cost+self.map[edge.u][nbrs]))
+        
+    def bellmonford(self,source):
+        dis = {}
+        for u in self.map:
+            dis[u] = 100000
+        
+        dis[source] = 0
+        edges = self.__egp()
+
+        for i in range(1,len(self.map)+1):
+            for ed in edges:
+                if dis[ed.u]+ed.cost < dis[ed.v]:
+                    if i == len(self.map):
+                        print("Neagtive Cycle")
+                        return
+                    dis[ed.v] = dis[ed.u]+ed.cost
+        
+        for i in dis:
+            print(i,"->",dis[i])
+
+    
 
 
+gpd = Graph(5)
+gpd.addEdge(1,2,8)
+gpd.addEdge(1,4,5)
+gpd.addEdge(1,3,4)
+gpd.addEdge(3,4,-3)
+gpd.addEdge(4,5,4)
+gpd.addEdge(5,2,2)
+gpd.addEdge(2,5,-10)
 
-gp = Graph(7)
-gp.addEdge(1,2,10)
-gp.addEdge(1,3,60)
-gp.addEdge(2,4,20)
-gp.addEdge(3,4,30)
+
+# gp = Graph(7)
+# gp.addEdge(1,2,10)
+# gp.addEdge(1,3,60)
+# gp.addEdge(2,4,55)
+# gp.addEdge(3,4,-15)
 # gp.addEdge(3,5,80)
-gp.addEdge(5,6,90)
-gp.addEdge(6,7,5)
-gp.addEdge(5,7,14)
+# gp.addEdge(5,6,90)
+# gp.addEdge(6,7,5)
+# gp.addEdge(5,7,14)
 
-gp.DFST()
+gpd.bellmonford(1)
+# gp.dijakstra()
+# gp.krushkal()
+# gp.DFST()
 # print(gp.noOfConnectedComponents())
 # print(gp.allConnectedComponents())
 # print(gp.isTree())
