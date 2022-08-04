@@ -9,5 +9,7 @@ def wine(price,si,ei):
         return max(fc,lc)
 
 
+
+
 pr = [2,3,5,1,4]
 print(wine(pr,0,len(pr)-1))
